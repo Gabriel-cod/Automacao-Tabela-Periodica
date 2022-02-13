@@ -5,13 +5,20 @@ while saída not in 'Ss':
     system('cls')
     print(f'Bem Vindo ao programa de Química')
     print('''- Informações sobre o programa:
-1º Vamos receber a quantidade de elétrons que o átomo possui;
-2º Vamos retornar as informações possíveis sobre esse átomo;
+1º Vamos receber a quantidade de elétrons que o átomo, ou íon, possui;
+2º Vamos retornar as informações possíveis sobre esse átomo/íon;
 3º O número quântico spin será considerado "-1/2" quando a seta estiver para cima (↑),
    e "1/2" quando a seta estiver para baixo (↓).\n''')
     sleep(2)
 # Receber a informação de quantos elétrons o átomo possui
-    elé = nint('Informe a quantidade de elétrons do átomo [somente números inteiros]: ')
+    elé = nint('Informe a quantidade de elétrons do átomo/íon [somente números inteiros]: ')
+    ion = autenticar_sn('Esse átomo é um íon? ')
+    if ion in 'Ss':
+        elé = convert(elé)
+# Descobrir o elemento químico
+    elemento = elemqui(elé)
+# Descobrir a família
+    
 # Descobrir a camada de valência
     sub, full = subnivel(elé)
 # Fazer a distribuição eletrônica
@@ -23,6 +30,7 @@ while saída not in 'Ss':
 # Exibir as informações coletadas
     print('\nRecebendo informações...\n')
     sleep(1)
+    print(f'Elemento químico: \t\t{elemento}')
     print(f'Subnível mais energético: \t{sub}')
     print(f'Número quântico principal (n): \t{sub[0]}')
     print(f'Número quântico secundário (l): {qsec.index(sub[1])}')
@@ -33,4 +41,4 @@ while saída not in 'Ss':
         print(f'{c} ', end='')
     print(f'{sub}\n')
 
-    saída = autenticar_saida()
+    saída = autenticar_sn('Deseja finalizar o programa? ')
