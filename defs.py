@@ -165,9 +165,6 @@ def familia(e):
         itens = l.split(' ')
         cont += 1
         for i in itens:
-            print(i)
-            print(i[0:2])
-            print(e[2])
             if i[0:2] in e[2]:
                 fam = f'{cont}A'
                 if cont == 1:
