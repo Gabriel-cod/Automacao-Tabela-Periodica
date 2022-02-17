@@ -30,6 +30,8 @@ while saída not in 'Ss':
             elé = convert(elé)
         # Descobrir o elemento químico
         elemento = elemqui(elé)
+        # Descobrir o grupo, a família e o nome específico do elemento
+        group, family, name = familia(elemento)
     # Processo através do nome do elemento químico
     elif info.isalpha():
         erro = False
@@ -49,6 +51,8 @@ while saída not in 'Ss':
             print('ERRO: digite um elemento válido! [NÃO se esqueça de assentos, caso o elemento possua]')
             sleep(3)
             continue
+        # Descobrir o grupo, a família e o nome específico do elemento
+        group, family, name = familia(elemento)
         elé = cont
     # Descobrir a camada de valência
     sub, full = subnivel(elé)
@@ -63,6 +67,9 @@ while saída not in 'Ss':
     sleep(1)
     print(f'Quantidade de elétrons: \t{elé}')
     print(f'Elemento químico: \t\t{elemento}')
+    print(f'Grupo do elemento: \t\t{group}')
+    print(f'Família do elemento: \t\t{family}')
+    print(f'Nome específico da família: \t{name}')
     print(f'Subnível mais energético: \t{sub}')
     print(f'Número quântico principal (n): \t{sub[0]}')
     print(f'Número quântico secundário (l): {qsec.index(sub[1])}')

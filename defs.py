@@ -153,3 +153,51 @@ def magnético(sub):
         else:
             spin = '-1/2 ↑' 
     return ml, spin
+
+
+def familia(e):
+    cont = 0
+    nome_e = fam = gp = ''
+    f = open('famílias.txt', 'r', encoding='utf-8')
+    lin = f.readlines()
+    e = e.split(' ')
+    for l in lin:
+        itens = l.split(' ')
+        cont += 1
+        for i in itens:
+            print(i)
+            print(i[0:2])
+            print(e[2])
+            if i[0:2] in e[2]:
+                fam = f'{cont}A'
+                if cont == 1:
+                    gp = '1'
+                    nome_e = 'Metais alcalinos'
+                elif cont == 2:
+                    gp = '2'
+                    nome_e = 'Metais alcalinos-terrosos'
+                elif cont == 3:
+                    gp = '13'
+                    nome_e = 'Família do Boro'
+                elif cont == 4:
+                    gp = '14'
+                    nome_e = 'Família do Carbono'
+                elif cont == 5:
+                    gp = '15'
+                    nome_e = 'Família do Nitrogênio'
+                elif cont == 6:
+                    gp = '16'
+                    nome_e = 'Calcogênios'
+                elif cont == 7:
+                    gp = '17'
+                    nome_e = 'Halogênios'
+                elif cont == 8:
+                    gp = '18'
+                    nome_e = 'Gases Nobres'
+            elif 'H' in e[2]:
+                fam = 'O Hidrogênio não possui uma família definida, apesar de alguns autores o enquadrarem na família 1A'
+                gp = 'Alguns autores enquadram o Hidrogênio no grupo 1, outros dizem que ele não possui grupo'
+                nome_e = '--'
+    if fam == '8A':
+        fam = '0'
+    return gp, fam, nome_e
