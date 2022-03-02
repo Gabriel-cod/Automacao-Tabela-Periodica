@@ -9,7 +9,7 @@ while saída not in 'Ss':
 3º O número quântico spin será considerado "-1/2" quando a seta estiver para cima (↑),
    e "1/2" quando a seta estiver para baixo (↓).\n''')
     # Receber a informação crucial sobre o átomo/íon
-    info = str(input('Dê alguma informação sobre o átomo/íon [nome ou quantidade de elétrons]: ')).strip().capitalize()
+    info = str(input('Dê alguma informação sobre o átomo/íon [nome ou quantidade de elétrons (1 a 118)]: ')).strip().capitalize()
     # primeira validação de informação
     if info.isnumeric() or info.isalpha():
         pass
@@ -21,17 +21,19 @@ while saída not in 'Ss':
     if info.isnumeric():
         elé = int(info)
         # Segunda validação de informação
-        if elé > 118:
+        if elé > 118 or elé < 1:
             print('\nERRO: digite uma quantidade de elétrons válida!')
             sleep(2)
             continue
-        ion = autenticar_sn('Esse átomo é um íon? ')
+        ion = autenticar_sn('Esse elemento é um íon, ou seja, ele perdeu ou ganhou elétrons em sua composição? ')
         if ion in 'Ss':
             elé = convert(elé)
         # Descobrir o elemento químico
         elemento = elemqui(elé)
         # Descobrir o grupo, a família e o nome específico do elemento
-        group, family, name = familia(elemento)
+        group, family, name = familiaA(elemento)
+        if group == family == name == '':
+            group, family, name = familiaB(elemento)
     # Processo através do nome do elemento químico
     elif info.isalpha():
         erro = False
@@ -39,9 +41,10 @@ while saída not in 'Ss':
         arq = open('elementos.txt', 'r', encoding='utf-8')
         linhas = arq.readlines()
         for l in linhas:
+            el = l.replace('\n', '')
             cont += 1
-            if info in l:
-                elemento = l
+            if info in el:
+                elemento = el
                 break
             elif cont == 118:
                 erro = True
@@ -52,7 +55,9 @@ while saída not in 'Ss':
             sleep(3)
             continue
         # Descobrir o grupo, a família e o nome específico do elemento
-        group, family, name = familia(elemento)
+        group, family, name = familiaA(elemento)
+        if group == family == name == '':
+            group, family, name = familiaB(elemento)
         elé = cont
     # Descobrir a camada de valência
     sub, full = subnivel(elé)

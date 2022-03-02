@@ -35,13 +35,15 @@ def convert(num):
 
 
 def elemqui(ele):
+    elem = ''
     cont = 0
     arq = open('elementos.txt', 'r', encoding='utf-8')
     linhas = arq.readlines()
     for l in linhas:
+        el = l.replace('\n', '')
         cont += 1
         if cont == ele:
-            elem = l
+            elem = el
             break
     arq.close()     
     return elem
@@ -155,17 +157,18 @@ def magnético(sub):
     return ml, spin
 
 
-def familia(e):
+def familiaA(e):
     cont = 0
     nome_e = fam = gp = ''
-    f = open('famílias.txt', 'r', encoding='utf-8')
+    f = open('famíliasA.txt', 'r', encoding='utf-8')
     lin = f.readlines()
     e = e.split(' ')
     for l in lin:
         itens = l.split(' ')
         cont += 1
         for i in itens:
-            if i[0:2] in e[2]:
+            simbolo = i.replace('\n', '')
+            if e[2] == simbolo:
                 fam = f'{cont}A'
                 if cont == 1:
                     gp = '1'
@@ -191,10 +194,64 @@ def familia(e):
                 elif cont == 8:
                     gp = '18'
                     nome_e = 'Gases Nobres'
-            elif 'H' in e[2]:
+            elif e[2] in 'H':
                 fam = 'O Hidrogênio não possui uma família definida, apesar de alguns autores o enquadrarem na família 1A'
                 gp = 'Alguns autores enquadram o Hidrogênio no grupo 1, outros dizem que ele não possui grupo'
                 nome_e = '--'
     if fam == '8A':
         fam = '0'
+    f.close()
+    return gp, fam, nome_e
+
+
+def familiaB(e):
+    cont = 0
+    nome_e = fam = gp = ''
+    f = open('famíliasB.txt', 'r', encoding='utf-8')
+    lin = f.readlines()
+    e = e.split(' ')
+    for l in lin:
+        itens = l.split(' ')
+        cont += 1
+        for i in itens:
+            simbolo = i.replace('\n', '')
+            if e[2] == simbolo:
+                if cont == 1:
+                    gp = '3'
+                    fam = '3B'
+                    nome_e = 'Não encontrado :/'
+                elif cont == 2:
+                    gp = '4'
+                    fam = '4B'
+                    nome_e = 'Grupo do Titânio'
+                elif cont == 3:
+                    gp = '5'
+                    fam = '5B'
+                    nome_e = 'Grupo do Vanádio'
+                elif cont == 4:
+                    gp = '6'
+                    fam = '6B'
+                    nome_e = 'Grupo do Crômio'
+                elif cont == 5:
+                    gp = '7'
+                    fam = '7B'
+                    nome_e = 'Grupo do Manganês'
+                elif cont in range(6, 9):
+                    fam = '8B'
+                    nome_e = 'Não encontrado :/'
+                    if cont == 6:
+                        gp = '8'
+                    elif cont == 7:
+                        gp = '9'
+                    elif cont == 8:
+                        gp = '10'
+                elif cont == 9:
+                    gp = '11'
+                    fam = '1B'
+                    nome_e = 'Grupo do Cobre'
+                elif cont == 10:
+                    gp = '12'
+                    fam = '2B'
+                    nome_e = 'Grupo do Zinco'
+    f.close()
     return gp, fam, nome_e
