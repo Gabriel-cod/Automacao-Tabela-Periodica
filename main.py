@@ -25,9 +25,16 @@ while saída not in 'Ss':
             print('\nERRO: digite uma quantidade de elétrons válida!')
             sleep(2)
             continue
-        ion = autenticar_sn('Esse elemento é um íon, ou seja, ele perdeu ou ganhou elétrons em sua composição? ')
+        ion = autenticar_sn('Esse elemento é um íon? Ou seja, ele perdeu ou ganhou elétrons em sua composição? ')
         if ion in 'Ss':
-            elé = convert(elé)
+            while True:
+                exp = convert(elé)
+                if 1 > exp or exp > 118:
+                    print('ERRO: a quantidade de elétrons desse íon é inválida.\n')
+                    pass
+                else:
+                    break
+            elé = exp
         # Descobrir o elemento químico
         elemento = elemqui(elé)
         # Descobrir o grupo, a família e o nome específico do elemento

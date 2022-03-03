@@ -1,7 +1,7 @@
 def autenticar_sn(txt):
     r = str(input(txt)).strip()[0]
     while r not in 'SsNn':
-        print(f'Erro: digite somente sim ou não.')
+        print(f'Erro: digite somente sim ou não.\n')
         r = str(input(txt)).strip()[0]
     return r
 
@@ -11,19 +11,21 @@ def nint(txt):
         x = str(input(f'{txt}'))
         if x.isnumeric():
             x = int(x)
-            if 0 < x < 119:
+            if 0 < x < 118:
                 ok = True
             else:
                 ok = False
+                print('ERRO: digite um número de 1 à 117.\n')
         else:
             ok = False
-            print(f'Erro: digite um número inteiro válido!')
+            print(f'ERRO: digite um número inteiro válido!\n')
         if ok:
             break
     return x
 
 
 def convert(num):
+    n = 0
     cation = autenticar_sn('Esse elemento é um cátion? Ou seja, ele perdeu elétrons, se tornando um elemento carregado positivamente? ')
     if cation in 'Ss':
         n = nint('Quantos elétrons o elemento perdeu? ')
